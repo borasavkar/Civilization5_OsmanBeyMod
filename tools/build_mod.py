@@ -551,8 +551,79 @@ local function SetUpPlayer(iPlayer, cities)
 	print("Osman Bey 1299: player " .. iPlayer .. " starts with " .. nFounded .. " cities")
 end
 
+-- ------------------------------------------------------------
+-- Starting units. A Medieval-era start still hands out Warriors and
+-- Scouts, while barbarians and rivals field medieval troops. Every land
+-- unit is upgraded along its upgrade line as far as its owner's
+-- technology allows (never into a unit that needs a strategic resource).
+-- ------------------------------------------------------------
+local function UnitForClass(pPlayer, sClass)
+	local civ = GameInfo.Civilizations[pPlayer:GetCivilizationType()]
+	if civ ~= nil then
+		for row in GameInfo.Civilization_UnitClassOverrides("CivilizationType = '" .. civ.Type .. "' AND UnitClassType = '" .. sClass .. "'") do
+			if row.UnitType == nil then return nil end
+			return GameInfo.Units[row.UnitType]
+		end
+	end
+	local class = GameInfo.UnitClasses[sClass]
+	return class and GameInfo.Units[class.DefaultUnit]
+end
+
+local function NeedsResource(unitInfo)
+	for _ in GameInfo.Unit_ResourceQuantityRequirements("UnitType = '" .. unitInfo.Type .. "'") do return true end
+	return false
+end
+
+local function BestUpgrade(pPlayer, unitInfo)
+	local pTeam = Teams[pPlayer:GetTeam()]
+	local best = nil
+	local current = unitInfo
+	for _ = 1, 8 do
+		local row = GameInfo.Unit_ClassUpgrades("UnitType = '" .. current.Type .. "'")()
+		if row == nil then break end
+		local nextInfo = UnitForClass(pPlayer, row.UnitClassType)
+		if nextInfo == nil then break end
+		local tech = nextInfo.PrereqTech and GameInfoTypes[nextInfo.PrereqTech]
+		if tech ~= nil and not pTeam:IsHasTech(tech) then break end
+		current = nextInfo
+		if not NeedsResource(nextInfo) then best = nextInfo end
+	end
+	return best
+end
+
+local function UpgradeStartingUnits(iPlayer)
+	local pPlayer = Players[iPlayer]
+	local swaps = {}
+	for pUnit in pPlayer:Units() do
+		if pUnit:IsCombatUnit() and pUnit:GetDomainType() == DomainTypes.DOMAIN_LAND then
+			local info = GameInfo.Units[pUnit:GetUnitType()]
+			local best = info and BestUpgrade(pPlayer, info)
+			if best ~= nil then table.insert(swaps, {pUnit, best}) end
+		end
+	end
+	for _, s in ipairs(swaps) do
+		local pUnit, best = s[1], s[2]
+		local x, y = pUnit:GetX(), pUnit:GetY()
+		pUnit:Kill(true, -1)
+		pPlayer:InitUnit(best.ID, x, y)
+	end
+	if #swaps > 0 then print("Osman Bey 1299: player " .. iPlayer .. ": " .. #swaps .. " starting units upgraded") end
+end
+
 local function SetUpScenario()
-	if Game.GetGameTurn() > 0 or not IsOurMap() then return end
+	-- A Medieval-era game does not start on turn 0, so compare with the start turn.
+	if Game.GetGameTurn() ~= Game.GetStartTurn() then return end
+	if not IsOurMap() then
+		print("Osman Bey 1299: not the Ottoman Frontiers map, nothing to do")
+		return
+	end
+	for iPlayer = 0, GameDefines.MAX_CIV_PLAYERS - 2 do
+		local pPlayer = Players[iPlayer]
+		if pPlayer ~= nil and pPlayer:IsAlive() and not pPlayer:IsBarbarian() then
+			local ok, err = pcall(UpgradeStartingUnits, iPlayer)
+			if not ok then print("Osman Bey 1299: unit upgrade error for player " .. iPlayer .. ": " .. tostring(err)) end
+		end
+	end
 	for iPlayer = 0, GameDefines.MAX_MAJOR_CIVS - 1 do
 		local pPlayer = Players[iPlayer]
 		if pPlayer ~= nil and pPlayer:IsAlive() then

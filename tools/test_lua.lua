@@ -104,9 +104,19 @@ function Player:Units()
 	local i = 0
 	return function() i = i + 1; return self.units[i] end
 end
+-- units: 1 settler, then a warrior (type 100) that can upgrade to spearman (101) and pikeman (102)
+local function mkUnit(t, combat)
+	return {t = t, GetUnitClassType = function(u) return u.t == 1 and 1 or 7 end, Kill = function(u) u.dead = true end,
+		IsCombatUnit = function() return combat end, GetDomainType = function() return 0 end,
+		GetUnitType = function(u) return u.t end, GetX = function() return 5 end, GetY = function() return 5 end}
+end
+function Player:InitUnit(t, x, y) local u = mkUnit(t, true); table.insert(self.units, u); return u end
+function Player:IsBarbarian() return false end
+function Player:GetTeam() return self.id end
 for i, c in ipairs(CIVS) do
 	local pl = setmetatable({id = i - 1, civ = i - 1, cities = {}, units = {}}, Player)
-	table.insert(pl.units, {GetUnitClassType = function() return 1 end, Kill = function(u) u.dead = true end})
+	table.insert(pl.units, mkUnit(1, false))
+	table.insert(pl.units, mkUnit(100, true))
 	Players[i - 1] = pl
 end
 local NUM_MINORS = #MINORS
@@ -185,8 +195,24 @@ end
 check(moved >= NUM_MINORS - 3, "city-states at historic sites: " .. moved .. "/" .. NUM_MINORS)
 
 -- ------------------------------------------------------------------ scenario start script
+DomainTypes = {DOMAIN_LAND = 0}
+Teams = setmetatable({}, {__index = function() return {IsHasTech = function(_, t) return t ~= 302 end} end})
+GameInfoTypes.TECH_BRONZE = 300; GameInfoTypes.TECH_CIVIL = 301; GameInfoTypes.TECH_GUNPOWDER = 302
+local U = {[100] = {ID = 100, Type = "UNIT_WARRIOR"}, [101] = {ID = 101, Type = "UNIT_SPEARMAN", PrereqTech = "TECH_BRONZE"},
+	[102] = {ID = 102, Type = "UNIT_PIKEMAN", PrereqTech = "TECH_CIVIL"}, [103] = {ID = 103, Type = "UNIT_MUSKETMAN", PrereqTech = "TECH_GUNPOWDER"}}
+for _, u in pairs(U) do U[u.Type] = u end
+GameInfo.Units = U
+GameInfo.UnitClasses = {UNITCLASS_SPEARMAN = {DefaultUnit = "UNIT_SPEARMAN"}, UNITCLASS_PIKEMAN = {DefaultUnit = "UNIT_PIKEMAN"},
+	UNITCLASS_MUSKETMAN = {DefaultUnit = "UNIT_MUSKETMAN"}}
+local UP = {UNIT_WARRIOR = "UNITCLASS_SPEARMAN", UNIT_SPEARMAN = "UNITCLASS_PIKEMAN", UNIT_PIKEMAN = "UNITCLASS_MUSKETMAN"}
+local function query(f) return function(_, q) local r = f(q); local done = false
+	return function() if done or r == nil then return nil end done = true return r end end end
+GameInfo.Unit_ClassUpgrades = setmetatable({}, {__call = query(function(q)
+	local t = string.match(q, "'(.-)'"); return UP[t] and {UnitClassType = UP[t]} end)})
+GameInfo.Civilization_UnitClassOverrides = setmetatable({}, {__call = query(function() return nil end)})
+GameInfo.Unit_ResourceQuantityRequirements = setmetatable({}, {__call = query(function() return nil end)})
 PreGame = {GetMapScript = function() return "C:/x/Maps/OB_Ottoman1299.lua" end}
-Game = {GetGameTurn = function() return 0 end}
+Game = {GetGameTurn = function() return 125 end, GetStartTurn = function() return 125 end}
 dofile(ROOT .. "Osman Bey 1299 Scenario/Lua/OB1299_Scenario.lua")
 local byz = Players[1]
 check(#byz.cities == 5, "Byzantium founded " .. #byz.cities .. " cities")
@@ -194,6 +220,8 @@ check(byz.cities[1] and byz.cities[1].name == "Constantinople", "Byzantine capit
 check(byz.cities[1] and byz.cities[1].b[GameInfoTypes.BUILDING_CASTLE] == 1, "Constantinople has a castle")
 check(byz.units[1].dead == true, "Byzantine settler removed")
 check(#Players[0].cities == 0 and not Players[0].units[1].dead, "Ottoman beylik keeps its settler")
+local ot = Players[0].units
+check(ot[2].dead and ot[3] ~= nil and ot[3].t == 102, "Ottoman warrior upgraded to pikeman (stops before gunpowder)")
 local total = 0
 for i = 1, #CIVS - 1 do total = total + #Players[i].cities end
 check(total >= 26, "scenario cities founded: " .. total)

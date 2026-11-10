@@ -26,7 +26,7 @@
   <Blocks />
   <Files>
     <File md5="92BFEEA3DCACFC120201FBF9FDBEA3AC" import="0">Core/OB1299_CityStates.sql</File>
-    <File md5="A3592E415B1FBD54B146A4953058BC42" import="0">Lua/OB1299_Scenario.lua</File>
+    <File md5="32AD94B14BEFF2199FD6A15F10F87D26" import="0">Lua/OB1299_Scenario.lua</File>
     <File md5="29124A4DFD99A14A9A42BCBF57ECEDDA" import="0">Text/OB1299_Text.xml</File>
     <File md5="D07C071C373B8C02F9A79C35A22DA3CA" import="0">UI/OB1299_Setup.lua</File>
     <File md5="0394BABF0F5182D1113B6B9978B47F41" import="0">UI/OB1299_Setup.xml</File>
