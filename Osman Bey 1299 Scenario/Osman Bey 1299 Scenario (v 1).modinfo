@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="9d3a5e7b-1c2f-4a68-8e4d-6b0f3c2a1299" version="1">
+  <Properties>
+    <Name>Rise of the Ottomans: 1299 (Scenario)</Name>
+    <Stability>Beta</Stability>
+    <Teaser>Anatolia, 1299: play Osman Bey or one of the great powers of the age, with the cities and city-states of the time.</Teaser>
+    <Description>A scenario for the Osman Bey mod. Starts in the Medieval era on the 'Ottoman Frontiers (1299)' map with the Ottoman Beylik, the Byzantine Empire, the Ilkhanate, the Mamluks, Venice, Austria, Poland and the Marinids. The great powers start with the cities they held in 1299, and the city-states are the Anatolian beyliks and the kingdoms of the time. Start it from Mods &gt; Single Player &gt; Custom Game. Requires the Osman Bey (Ottoman Beylik) mod and Brave New World.</Description>
+    <Authors>Bora Savkar</Authors>
+    <HideSetupGame>1</HideSetupGame>
+    <AffectsSavedGames>1</AffectsSavedGames>
+    <MinCompatibleSaveVersion>0</MinCompatibleSaveVersion>
+    <SupportsSinglePlayer>1</SupportsSinglePlayer>
+    <SupportsMultiplayer>0</SupportsMultiplayer>
+    <SupportsHotSeat>0</SupportsHotSeat>
+    <SupportsMac>1</SupportsMac>
+    <ReloadAudioSystem>0</ReloadAudioSystem>
+    <ReloadLandmarkSystem>0</ReloadLandmarkSystem>
+    <ReloadStrategicViewSystem>0</ReloadStrategicViewSystem>
+    <ReloadUnitSystem>0</ReloadUnitSystem>
+  </Properties>
+  <Dependencies>
+    <Dlc id="6DA07636-4123-4018-B643-6575B4EC336B" minversion="0" maxversion="999" />
+    <Mod id="4f6b2c1e-8a3d-4e57-b0c9-2d1e9a7f1299" minversion="0" maxversion="999" title="Osman Bey (Ottoman Beylik)" />
+  </Dependencies>
+  <References />
+  <Blocks />
+  <Files>
+    <File md5="92BFEEA3DCACFC120201FBF9FDBEA3AC" import="0">Core/OB1299_CityStates.sql</File>
+    <File md5="A3592E415B1FBD54B146A4953058BC42" import="0">Lua/OB1299_Scenario.lua</File>
+    <File md5="29124A4DFD99A14A9A42BCBF57ECEDDA" import="0">Text/OB1299_Text.xml</File>
+    <File md5="D07C071C373B8C02F9A79C35A22DA3CA" import="0">UI/OB1299_Setup.lua</File>
+    <File md5="0394BABF0F5182D1113B6B9978B47F41" import="0">UI/OB1299_Setup.xml</File>
+  </Files>
+  <Actions>
+    <OnModActivated>
+      <UpdateDatabase>Core/OB1299_CityStates.sql</UpdateDatabase>
+      <UpdateDatabase>Text/OB1299_Text.xml</UpdateDatabase>
+    </OnModActivated>
+  </Actions>
+  <EntryPoints>
+    <EntryPoint type="Custom" file="UI/OB1299_Setup.xml">
+      <Name>TXT_KEY_OB1299_TITLE</Name>
+      <Description>TXT_KEY_OB1299_DESC</Description>
+    </EntryPoint>
+    <EntryPoint type="InGameUIAddin" file="Lua/OB1299_Scenario.lua">
+      <Name>OB1299_Scenario</Name>
+      <Description>Places the cities of 1299</Description>
+    </EntryPoint>
+  </EntryPoints>
+</Mod>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="4f6b2c1e-8a3d-4e57-b0c9-2d1e9a7f1299" version="1">
+  <Properties>
+    <Name>Osman Bey (Ottoman Beylik)</Name>
+    <Stability>Beta</Stability>
+    <Teaser>Osman Bey and the Ottoman Beylik, with Akinci and Janissary units, three Ottoman buildings and a real map of the Ottoman world in 1299.</Teaser>
+    <Description>Adds Osman Bey, founder of the Ottoman state, leading the Ottoman Beylik. Unique abilities: Osman's Dream (captured cities have no resistance and pay gold; faster Great Generals), the Akinci (replaces the Knight), the Janissary (replaces the Musketman), the Kervansaray, the Medrese and the Tophane. Includes the 'Ottoman Frontiers (1299)' map: real geography from Vienna to Yemen and from Morocco to the Caspian Sea, with rivers and historical start positions. Requires Brave New World.</Description>
+    <Authors>Bora Savkar</Authors>
+    <HideSetupGame>0</HideSetupGame>
+    <AffectsSavedGames>1</AffectsSavedGames>
+    <MinCompatibleSaveVersion>0</MinCompatibleSaveVersion>
+    <SupportsSinglePlayer>1</SupportsSinglePlayer>
+    <SupportsMultiplayer>1</SupportsMultiplayer>
+    <SupportsHotSeat>1</SupportsHotSeat>
+    <SupportsMac>1</SupportsMac>
+    <ReloadAudioSystem>1</ReloadAudioSystem>
+    <ReloadLandmarkSystem>0</ReloadLandmarkSystem>
+    <ReloadStrategicViewSystem>0</ReloadStrategicViewSystem>
+    <ReloadUnitSystem>0</ReloadUnitSystem>
+  </Properties>
+  <Dependencies>
+    <Dlc id="6DA07636-4123-4018-B643-6575B4EC336B" minversion="0" maxversion="999" />
+  </Dependencies>
+  <References />
+  <Blocks />
+  <Files>
+    <File md5="BDA2BBDA725F00936D0DC2E15AD044EB" import="1">Art/Icons/OB_CivAlphaAtlas_128.dds</File>
+    <File md5="0A45AC099571266E57152DF4D85E5715" import="1">Art/Icons/OB_CivAlphaAtlas_16.dds</File>
+    <File md5="A728AB21197ECF930D520ABC4D2CE36D" import="1">Art/Icons/OB_CivAlphaAtlas_24.dds</File>
+    <File md5="99E32140A6E62C89968CC9287D7423D1" import="1">Art/Icons/OB_CivAlphaAtlas_32.dds</File>
+    <File md5="2F388C715804AFEA22009CB844D8808A" import="1">Art/Icons/OB_CivAlphaAtlas_45.dds</File>
+    <File md5="561567871C789273BCD04E9A2EAD656B" import="1">Art/Icons/OB_CivAlphaAtlas_48.dds</File>
+    <File md5="272517D40415EC066862FAC75AFA9887" import="1">Art/Icons/OB_CivAlphaAtlas_64.dds</File>
+    <File md5="04C1675C3A38C3FAD9B18DD8B5DB60F5" import="1">Art/Icons/OB_CivAlphaAtlas_80.dds</File>
+    <File md5="E2C9B58E6268FF2404907E56D9B8A041" import="1">Art/Icons/OB_CivAtlas_128.dds</File>
+    <File md5="4D59CC9BE549450A5B566F8EB543E880" import="1">Art/Icons/OB_CivAtlas_16.dds</File>
+    <File md5="76D60516E07B885E4E92DBFF352F2ED0" import="1">Art/Icons/OB_CivAtlas_24.dds</File>
+    <File md5="88C2C7470141722EF25062A4AB71E704" import="1">Art/Icons/OB_CivAtlas_256.dds</File>
+    <File md5="9F73280F39668CB686CFF05A686ADB98" import="1">Art/Icons/OB_CivAtlas_32.dds</File>
+    <File md5="2938FC5214146BB4174D2C6DC3687A57" import="1">Art/Icons/OB_CivAtlas_45.dds</File>
+    <File md5="284C9EFB8ACE1EE4C28D4B9C2B7A42AA" import="1">Art/Icons/OB_CivAtlas_48.dds</File>
+    <File md5="0C1B349572DB82D3024CD137684642CB" import="1">Art/Icons/OB_CivAtlas_64.dds</File>
+    <File md5="A181052D40A6D6FE83B3A024E509C75D" import="1">Art/Icons/OB_CivAtlas_80.dds</File>
+    <File md5="4F4E222B01A2AB5CF244BEACDCEBA1BB" import="1">Art/Icons/OB_LeaderAtlas_128.dds</File>
+    <File md5="FC155BBB44B2747F9D79E53BEEB72AAC" import="1">Art/Icons/OB_LeaderAtlas_256.dds</File>
+    <File md5="C70FB7952D2AD6E73BF417D58E6EF23F" import="1">Art/Icons/OB_LeaderAtlas_32.dds</File>
+    <File md5="81B6F000917999BAC03C26C448353379" import="1">Art/Icons/OB_LeaderAtlas_45.dds</File>
+    <File md5="8095AF9D6AB7AA7511C42741CBB5D1A3" import="1">Art/Icons/OB_LeaderAtlas_64.dds</File>
+    <File md5="D4A9F22440D91BC216F15B81E2625F1D" import="1">Art/Icons/OB_LeaderAtlas_80.dds</File>
+    <File md5="1CD03877C76CD45803362439A7CB2E57" import="1">Art/Leaders/OB_Osman_DOM.dds</File>
+    <File md5="3097227B9962B498448B546B3595D112" import="1">Art/Leaders/OB_Osman_Diplo.dds</File>
+    <File md5="6A88F0D1FA777038894852A5C388A5CF" import="1">Art/Leaders/OB_Osman_Scene.xml</File>
+    <File md5="AB1115F643D0CA8FDA564E4F55F563EC" import="0">Core/OB_Art.sql</File>
+    <File md5="7103F98F9287D1A854EFB91B9CBF77D4" import="0">Core/OB_Audio.xml</File>
+    <File md5="2D23088E13FA00E5A6A670EA3FDEB452" import="0">Core/OB_Civilization.xml</File>
+    <File md5="1E0B52B33FB6B0857299B8C2CF3CE8C8" import="0">Core/OB_Promotions.xml</File>
+    <File md5="F7B88E8FFCAA3FEAE0F9448950D9CFE2" import="0">Core/OB_Uniques.sql</File>
+    <File md5="101EE07DC6F3A7FD01BFA6D71301C062" import="0">Lua/OB_Traits.lua</File>
+    <File md5="F78DAEF768E9B63275ADE86A9E36DB51" import="0">Maps/OB_Ottoman1299.lua</File>
+    <File md5="39758B3C720A1B617170B08983449C52" import="1">Sounds/OB_Music_Attack.mp3</File>
+    <File md5="6F11BC4CAC16A2E6F068615B139B61F1" import="1">Sounds/OB_Music_Calm.mp3</File>
+    <File md5="86D7FD5D9FAC77F7F7D2281C2C7DCAEA" import="1">Sounds/OB_Music_Diplomacy.mp3</File>
+    <File md5="14955858D46A88647502614217963C41" import="1">Sounds/OB_Music_MyCountry.mp3</File>
+    <File md5="2BED18C878253C18B917517B4ACA51F9" import="1">Sounds/OB_Music_Risky.mp3</File>
+    <File md5="51197DD9A4C8D8A769D75C44C0725986" import="0">Text/OB_Text.xml</File>
+  </Files>
+  <Actions>
+    <OnModActivated>
+      <UpdateDatabase>Core/OB_Civilization.xml</UpdateDatabase>
+      <UpdateDatabase>Text/OB_Text.xml</UpdateDatabase>
+      <UpdateDatabase>Core/OB_Promotions.xml</UpdateDatabase>
+      <UpdateDatabase>Core/OB_Audio.xml</UpdateDatabase>
+      <UpdateDatabase>Core/OB_Uniques.sql</UpdateDatabase>
+      <UpdateDatabase>Core/OB_Art.sql</UpdateDatabase>
+    </OnModActivated>
+  </Actions>
+  <EntryPoints>
+    <EntryPoint type="InGameUIAddin" file="Lua/OB_Traits.lua">
+      <Name>OB_Traits</Name>
+      <Description>Osman's Dream (captured cities)</Description>
+    </EntryPoint>
+    <EntryPoint type="MapScript" file="Maps/OB_Ottoman1299.lua">
+      <Name>TXT_KEY_OB_MAP_NAME</Name>
+      <Description>TXT_KEY_OB_MAP_HELP</Description>
+    </EntryPoint>
+  </EntryPoints>
+</Mod>
