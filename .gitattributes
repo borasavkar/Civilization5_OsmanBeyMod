@@ -1,0 +1,3 @@
+# Keep the mod files byte-identical so the MD5 hashes in the .modinfo files stay valid
+"Osman Bey/**" -text
+"Osman Bey 1299 Scenario/**" -text
