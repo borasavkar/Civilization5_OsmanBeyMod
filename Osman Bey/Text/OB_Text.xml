@@ -45,7 +45,7 @@
 			<Text>The Ottoman Beylik was one of many small Turkmen principalities that emerged in Anatolia as the Seljuk Sultanate of Rum broke apart under Mongol overlordship at the end of the 13th century. Its position was unusual: it lay directly on the Byzantine frontier in Bithynia, within reach of the rich cities of Bursa, Nicaea and Nicomedia and of the straits leading to Europe. Frontier warriors, dervishes and settlers were drawn to it, and the beylik grew quickly by conquest and by winning over the local population.</Text>
 		</Row>
 		<Row Tag="TXT_KEY_CIV5_UNIT_OB_AKINCI_TEXT">
-			<Text>Akincis were the light cavalry of the Ottoman frontier. Unpaid volunteers who lived on the spoils of their raids, they rode far ahead of the main army to spread fear, gather intelligence and weaken the enemy before a campaign. Their commanders came from a few hereditary families, such as the Mihaloglu and the Evrenosoglu.</Text>
+			<Text>Akinjis (Turkish: akinci, 'raiders') were the light cavalry of the Ottoman frontier. Unpaid volunteers who lived on the spoils of their raids, they rode far ahead of the main army to spread fear, gather intelligence and weaken the enemy before a campaign. Their commanders came from a few hereditary families, such as the Mihaloglu and the Evrenosoglu.</Text>
 		</Row>
 		<Row Tag="TXT_KEY_CIV5_UNIT_OB_YENICERI_TEXT">
 			<Text>The Janissaries (Yeniceri, 'new soldiers') were the standing infantry of the Ottoman sultans, formed in the 14th century. They were paid salaries, lived in barracks, wore uniforms and drilled together, which made them one of the first permanent professional armies in Europe. By the 16th century they were famous for their discipline and their firearms.</Text>
@@ -318,7 +318,7 @@
 			<Text>Saltuk Alp</Text>
 		</Row>
 		<Row Tag="TXT_KEY_PROMOTION_OB_AKINCI_RAID">
-			<Text>Akinci Raider</Text>
+			<Text>Akinji Raider</Text>
 		</Row>
 		<Row Tag="TXT_KEY_PROMOTION_OB_AKINCI_RAID_HELP">
 			<Text>+1 sight. Pillaging costs no movement and heals the unit.</Text>
@@ -336,10 +336,10 @@
 			<Text>Replaces the Musketman. Stronger than the Musketman, heals after destroying an enemy, fights with an attack bonus and starts with the Drill I promotion.</Text>
 		</Row>
 		<Row Tag="TXT_KEY_UNIT_OB_AKINCI">
-			<Text>Akinci</Text>
+			<Text>Akinji</Text>
 		</Row>
 		<Row Tag="TXT_KEY_UNIT_OB_AKINCI_STRATEGY">
-			<Text>The Akinci is a raider. Use its speed and free pillaging to strip enemy improvements, cut trade routes and catch exposed workers and settlers. Like the Knight it is weak against cities; leave sieges to the infantry and artillery.</Text>
+			<Text>The Akinji is a raider. Use its speed and free pillaging to strip enemy improvements, cut trade routes and catch exposed workers and settlers. Like the Knight it is weak against cities; leave sieges to the infantry and artillery.</Text>
 		</Row>
 		<Row Tag="TXT_KEY_UNIT_OB_YENICERI">
 			<Text>Janissary (Yeniceri)</Text>

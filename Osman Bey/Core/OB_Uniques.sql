@@ -78,6 +78,14 @@ DROP TABLE OB_UnitMap;
 -- Akinci (replaces Knight): no Horses needed, 10% cheaper, raider promotion
 DELETE FROM Unit_ResourceQuantityRequirements WHERE UnitType = 'UNIT_OB_AKINCI';
 UPDATE Units SET Cost = Cost * 9 / 10, FaithCost = FaithCost * 9 / 10 WHERE Type = 'UNIT_OB_AKINCI';
+-- Looks like a Turkish horseman, not a European knight: model, portrait and flag of the Ottoman Sipahi
+UPDATE Units SET
+	UnitArtInfo        = (SELECT UnitArtInfo        FROM Units WHERE Type = 'UNIT_OTTOMAN_SIPAHI'),
+	IconAtlas          = (SELECT IconAtlas          FROM Units WHERE Type = 'UNIT_OTTOMAN_SIPAHI'),
+	PortraitIndex      = (SELECT PortraitIndex      FROM Units WHERE Type = 'UNIT_OTTOMAN_SIPAHI'),
+	UnitFlagAtlas      = (SELECT UnitFlagAtlas      FROM Units WHERE Type = 'UNIT_OTTOMAN_SIPAHI'),
+	UnitFlagIconOffset = (SELECT UnitFlagIconOffset FROM Units WHERE Type = 'UNIT_OTTOMAN_SIPAHI')
+WHERE Type = 'UNIT_OB_AKINCI' AND EXISTS (SELECT 1 FROM Units WHERE Type = 'UNIT_OTTOMAN_SIPAHI');
 INSERT INTO Unit_FreePromotions (UnitType, PromotionType)
 SELECT 'UNIT_OB_AKINCI', 'PROMOTION_OB_AKINCI_RAID'
 WHERE EXISTS (SELECT 1 FROM UnitPromotions WHERE Type = 'PROMOTION_OB_AKINCI_RAID');

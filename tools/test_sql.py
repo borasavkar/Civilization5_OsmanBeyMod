@@ -158,6 +158,9 @@ def main():
           "Akinci needs no Horses")
     check(one(db, "SELECT Cost FROM Units WHERE Type='UNIT_OB_AKINCI'") < one(db, "SELECT Cost FROM Units WHERE Type='UNIT_KNIGHT'"),
           "Akinci is cheaper than the Knight")
+    check(one(db, "SELECT UnitArtInfo FROM Units WHERE Type='UNIT_OB_AKINCI'") == "ART_DEF_UNIT_U_OTTOMAN_SIPAHI",
+          "Akinji uses the Sipahi model")
+    check(one(db, "SELECT Text FROM Language_en_US WHERE Tag='TXT_KEY_UNIT_OB_AKINCI'") == "Akinji", "unit is named Akinji")
     check(one(db, "SELECT Class FROM Units WHERE Type='UNIT_OB_YENICERI'") == "UNITCLASS_MUSKETMAN", "Janissary replaces Musketman")
     check(one(db, "SELECT Combat FROM Units WHERE Type='UNIT_OB_YENICERI'") == 24, "Janissary strength 24")
     check(one(db, "SELECT COUNT(*) FROM Unit_FreePromotions WHERE UnitType='UNIT_OB_YENICERI'") >= 3,

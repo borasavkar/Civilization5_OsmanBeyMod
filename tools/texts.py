@@ -81,13 +81,13 @@ t("TXT_KEY_CIVILOPEDIA_CIVS_OB_OTTOMAN_FACTOID_TEXT",
 # Unique units
 # ======================================================================
 UNITS = {
-    "AKINCI": ("Akinci",
+    "AKINCI": ("Akinji",
                "Replaces the Knight. Does not require [ICON_RES_HORSE] Horses, costs less, has +1 sight and can "
                "pillage without spending movement, healing when it does.",
-               "The Akinci is a raider. Use its speed and free pillaging to strip enemy improvements, cut trade routes "
+               "The Akinji is a raider. Use its speed and free pillaging to strip enemy improvements, cut trade routes "
                "and catch exposed workers and settlers. Like the Knight it is weak against cities; leave sieges to the "
                "infantry and artillery.",
-               "Akincis were the light cavalry of the Ottoman frontier. Unpaid volunteers who lived on the spoils of "
+               "Akinjis (Turkish: akinci, 'raiders') were the light cavalry of the Ottoman frontier. Unpaid volunteers who lived on the spoils of "
                "their raids, they rode far ahead of the main army to spread fear, gather intelligence and weaken the "
                "enemy before a campaign. Their commanders came from a few hereditary families, such as the "
                "Mihaloglu and the Evrenosoglu."),
@@ -138,7 +138,7 @@ for tag, (name, helptext, strat, pedia) in BUILDINGS.items():
     t("TXT_KEY_BUILDING_OB_%s_STRATEGY" % tag, strat)
     t("TXT_KEY_BUILDING_OB_%s_PEDIA" % tag, pedia)
 
-t("TXT_KEY_PROMOTION_OB_AKINCI_RAID", "Akinci Raider")
+t("TXT_KEY_PROMOTION_OB_AKINCI_RAID", "Akinji Raider")
 t("TXT_KEY_PROMOTION_OB_AKINCI_RAID_HELP", "+1 sight. Pillaging costs no movement and heals the unit.")
 
 t("TXT_KEY_OB_ISTIMALET", "Istimalet: [ICON_RESISTANCE] Resistance in {1_City} has ended and the treasury receives {2_Num} [ICON_GOLD] Gold.")

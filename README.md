@@ -17,7 +17,7 @@ The repository holds two mods:
 |---|---|
 | **Leader** | Osman Bey (Osman I, c. 1258 – 1323/24) |
 | **Ability: Osman's Dream** | Captured cities have no resistance and pay Gold equal to 10 × their population (*istimalet*, "winning over"). Great Generals are earned 50% faster. |
-| **Akinci** (replaces Knight) | Does not need Horses, 10% cheaper, +1 sight, pillages without spending movement and heals when it pillages. |
+| **Akinji** (Turkish *akıncı*, replaces Knight) | Uses the Ottoman Sipahi model. Does not need Horses, 10% cheaper, +1 sight, pillages without spending movement and heals when it pillages. |
 | **Janissary / Yeniçeri** (replaces Musketman) | Strength 24, heals after destroying an enemy, attack bonus, starts with Drill I. |
 | **Kervansaray** (replaces Caravansary) | +2 Gold and +1 Culture on top of the trade-route bonuses. |
 | **Medrese** (replaces University) | +1 Culture and +1 Faith on top of the Science. |
