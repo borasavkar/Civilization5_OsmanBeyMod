@@ -390,7 +390,7 @@
 			<Text>Difficulty: {1_Name}</Text>
 		</Row>
 		<Row Tag="TXT_KEY_OB1299_INTRO">
-			<Text>It is the year 1299. The Seljuk Sultanate of Rum has crumbled under Mongol rule, and a patchwork of Turkmen beyliks now covers Anatolia. In the north-west, on the very border of the Eastern Roman Empire, Osman Bey rules a small principality around Sögüt.[NEWLINE][NEWLINE]Constantinople is still the greatest city of the Christian world, though its empire has shrunk to a few provinces. The Ilkhans rule Persia and Iraq from Tabriz, the Mamluk sultans hold Egypt, Syria and the holy cities, and Venice commands the sea. Beyond the Danube, Hungary, Austria and Poland are rising.[NEWLINE][NEWLINE]The great powers begin with the cities they held in 1299. The Ottoman Beylik begins with a single settler near Bursa. History is yours to write.</Text>
+			<Text>It is the year 1299. The Seljuk Sultanate of Rum has crumbled under Mongol rule, and a patchwork of Turkmen beyliks now covers Anatolia. In the north-west, on the very border of the Eastern Roman Empire, Osman Bey rules a small principality around Sögüt.[NEWLINE][NEWLINE]Constantinople is still the greatest city of the Christian world, though its empire has shrunk to a few provinces. The Ilkhans rule Persia and Iraq from Tabriz, the Mamluk sultans hold Egypt, Syria and the holy cities, and Venice commands the sea. Beyond the Danube, Hungary, Austria and Poland are rising.[NEWLINE][NEWLINE]The great powers begin with the cities they held in 1299. The Ottoman Beylik begins near Bursa with its settlers, two Akinjis and two Great Bombards. History is yours to write.</Text>
 		</Row>
 		<Row Tag="TXT_KEY_OB1299_ROLE_AUSTRIA">
 			<Text>Represents the Duchy of Austria under the Habsburg Albert I.</Text>

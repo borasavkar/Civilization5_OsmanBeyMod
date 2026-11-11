@@ -190,8 +190,8 @@ SCENARIO_ROLES = {
 
 # Cities held in 1299: (name, lon, lat, population). The first city is the capital.
 SCENARIO_CITIES = {
-    "CIVILIZATION_BYZANTIUM": [("Constantinople", 28.70, 41.02, 8), ("Thessalonica", 22.94, 40.64, 5),
-                               ("Adrianople", 26.56, 41.67, 4), ("Philadelphia", 28.52, 38.35, 3),
+    "CIVILIZATION_BYZANTIUM": [("Constantinople", 28.70, 41.02, 6), ("Thessalonica", 22.94, 40.64, 5),
+                               ("Adrianople", 26.56, 41.67, 3), ("Philadelphia", 28.52, 38.35, 3),
                                ("Mistra", 22.37, 37.07, 3)],
     "CIVILIZATION_MONGOL": [("Tabriz", 46.29, 38.08, 8), ("Baghdad", 44.36, 33.31, 6), ("Sultaniyya", 48.79, 36.43, 4),
                             ("Mosul", 43.13, 36.34, 4), ("Erzurum", 41.27, 39.90, 3), ("Sivas", 37.02, 39.75, 4),

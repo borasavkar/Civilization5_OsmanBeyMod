@@ -201,6 +201,8 @@
 			<Description>TXT_KEY_TRAIT_OB_OSMAN</Description>
 			<ShortDescription>TXT_KEY_TRAIT_OB_OSMAN_SHORT</ShortDescription>
 			<GreatGeneralRateModifier>50</GreatGeneralRateModifier>
+			<ExtraEmbarkMoves>1</ExtraEmbarkMoves>
+			<EmbarkedToLandFlatCost>true</EmbarkedToLandFlatCost>
 		</Row>
 	</Traits>
 	<Leaders>

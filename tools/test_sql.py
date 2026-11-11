@@ -162,15 +162,27 @@ def main():
           "Akinji uses the Sipahi model")
     check(one(db, "SELECT Text FROM Language_en_US WHERE Tag='TXT_KEY_UNIT_OB_AKINCI'") == "Akinji", "unit is named Akinji")
     check(one(db, "SELECT Class FROM Units WHERE Type='UNIT_OB_YENICERI'") == "UNITCLASS_MUSKETMAN", "Janissary replaces Musketman")
-    check(one(db, "SELECT Combat FROM Units WHERE Type='UNIT_OB_YENICERI'") == 24, "Janissary strength 24")
+    check(one(db, "SELECT Combat FROM Units WHERE Type='UNIT_OB_YENICERI'") == 28, "Janissary strength 28")
     check(one(db, "SELECT COUNT(*) FROM Unit_FreePromotions WHERE UnitType='UNIT_OB_YENICERI'") >= 3,
           "Janissary promotions copied plus Drill I")
     check(one(db, "SELECT COUNT(*) FROM Unit_FreePromotions WHERE UnitType='UNIT_OB_AKINCI' AND PromotionType='PROMOTION_OB_AKINCI_RAID'") == 1,
           "Akinci raider promotion")
-    check(one(db, "SELECT COUNT(*) FROM Civilization_UnitClassOverrides WHERE CivilizationType='CIVILIZATION_OB_OTTOMAN'") == 2,
-          "two unit overrides")
-    check(one(db, "SELECT COUNT(*) FROM Civilization_BuildingClassOverrides WHERE CivilizationType='CIVILIZATION_OB_OTTOMAN'") == 3,
-          "three building overrides")
+    check(one(db, "SELECT COUNT(*) FROM Civilization_UnitClassOverrides WHERE CivilizationType='CIVILIZATION_OB_OTTOMAN'") == 3,
+          "three unit overrides")
+    check(one(db, "SELECT COUNT(*) FROM Civilization_BuildingClassOverrides WHERE CivilizationType='CIVILIZATION_OB_OTTOMAN'") == 5,
+          "five building overrides")
+    check(one(db, "SELECT Combat FROM Units WHERE Type='UNIT_OB_AKINCI'") == 24 and
+          one(db, "SELECT Moves FROM Units WHERE Type='UNIT_OB_AKINCI'") == 5, "Akinji 24 strength, 5 moves")
+    check(one(db, "SELECT Class||'|'||PrereqTech||'|'||RangedCombat||'|'||UnitArtInfo FROM Units WHERE Type='UNIT_OB_SAHI'")
+          == "UNITCLASS_TREBUCHET|TECH_MATHEMATICS|24|ART_DEF_UNIT_CANNON", "Great Bombard: Mathematics, 24 ranged, cannon model")
+    check(one(db, "SELECT Happiness FROM Buildings WHERE Type='BUILDING_OB_CAMI'") == 1 and
+          one(db, "SELECT Yield FROM Building_YieldChanges WHERE BuildingType='BUILDING_OB_CAMI' AND YieldType='YIELD_FAITH'") == 4,
+          "Mosque: 4 Faith, 1 Happiness")
+    check(one(db, "SELECT SUM(Yield) FROM Building_YieldChanges WHERE BuildingType='BUILDING_OB_KAPALICARSI' AND YieldType='YIELD_GOLD'") >= 4,
+          "Grand Bazaar gold")
+    check(one(db, "SELECT COUNT(*) FROM Trait_FreePromotionUnitCombats WHERE PromotionType='PROMOTION_OB_GHAZA'") == 5,
+          "Ghaza promotion for five unit types")
+    check(one(db, "SELECT ExtraEmbarkMoves FROM Traits WHERE Type='TRAIT_OB_OSMAN'") == 1, "embark bonus")
     check(one(db, "SELECT COUNT(*) FROM Building_ClassesNeededInCity WHERE BuildingType='BUILDING_OB_MEDRESE'") >= 1,
           "Medrese needs a Library like the University")
     check(one(db, "SELECT TradeRouteLandGoldBonus FROM Buildings WHERE Type='BUILDING_OB_KERVANSARAY'") ==

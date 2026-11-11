@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="9d3a5e7b-1c2f-4a68-8e4d-6b0f3c2a1299" version="1">
+<Mod id="9d3a5e7b-1c2f-4a68-8e4d-6b0f3c2a1299" version="2">
   <Properties>
     <Name>Rise of the Ottomans: 1299 (Scenario)</Name>
     <Stability>Beta</Stability>
@@ -26,8 +26,8 @@
   <Blocks />
   <Files>
     <File md5="92BFEEA3DCACFC120201FBF9FDBEA3AC" import="0">Core/OB1299_CityStates.sql</File>
-    <File md5="32AD94B14BEFF2199FD6A15F10F87D26" import="0">Lua/OB1299_Scenario.lua</File>
-    <File md5="29124A4DFD99A14A9A42BCBF57ECEDDA" import="0">Text/OB1299_Text.xml</File>
+    <File md5="150DEE25F5467CF142139E0ED63AF348" import="0">Lua/OB1299_Scenario.lua</File>
+    <File md5="15A08FB60F70243C628B094099D354CB" import="0">Text/OB1299_Text.xml</File>
     <File md5="D07C071C373B8C02F9A79C35A22DA3CA" import="0">UI/OB1299_Setup.lua</File>
     <File md5="0394BABF0F5182D1113B6B9978B47F41" import="0">UI/OB1299_Setup.xml</File>
   </Files>

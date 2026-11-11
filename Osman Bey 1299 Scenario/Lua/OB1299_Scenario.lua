@@ -8,7 +8,7 @@ print("Osman Bey 1299: OB1299_Scenario.lua loaded")
 
 -- {name, x, y, population}; the first city is the capital
 local SCENARIO_CITIES = {
-	["CIVILIZATION_BYZANTIUM"] = {{"Constantinople", 53, 60, 8}, {"Thessalonica", 38, 59, 5}, {"Adrianople", 47, 62, 4}, {"Philadelphia", 53, 50, 3}, {"Mistra", 37, 45, 3}},
+	["CIVILIZATION_BYZANTIUM"] = {{"Constantinople", 53, 60, 6}, {"Thessalonica", 38, 59, 5}, {"Adrianople", 47, 62, 3}, {"Philadelphia", 53, 50, 3}, {"Mistra", 37, 45, 3}},
 	["CIVILIZATION_MONGOL"] = {{"Tabriz", 94, 49, 8}, {"Baghdad", 91, 33, 6}, {"Sultaniyya", 97, 43, 4}, {"Mosul", 88, 43, 4}, {"Erzurum", 85, 56, 3}, {"Sivas", 75, 55, 4}, {"Isfahan", 101, 31, 5}},
 	["CIVILIZATION_EGYPT"] = {{"Cairo", 60, 26, 9}, {"Alexandria", 56, 28, 5}, {"Damascus", 74, 34, 6}, {"Aleppo", 76, 42, 5}, {"Jerusalem", 71, 29, 3}, {"Qus", 64, 17, 3}},
 	["CIVILIZATION_VENICE"] = {{"Venice", 19, 73, 6}, {"Candia", 43, 40, 3}, {"Zara", 24, 69, 2}},
@@ -19,7 +19,7 @@ local SCENARIO_CITIES = {
 
 -- Extra buildings for some cities (Theodosian Walls of Constantinople...)
 local CITY_BUILDINGS = {
-	["Constantinople"] = {"BUILDING_WALLS", "BUILDING_CASTLE"},
+	["Constantinople"] = {"BUILDING_WALLS"},
 	["Tabriz"] = {"BUILDING_WALLS"},
 	["Cairo"] = {"BUILDING_WALLS"},
 	["Venice"] = {"BUILDING_WALLS"},
@@ -182,6 +182,20 @@ local function UpgradeStartingUnits(iPlayer)
 	if #swaps > 0 then print("Osman Bey 1299: player " .. iPlayer .. ": " .. #swaps .. " starting units upgraded") end
 end
 
+-- The gazis of Osman: two Akinjis and two Great Bombards next to the starting settler.
+local OTTOMAN_ARMY = {"UNIT_OB_AKINCI", "UNIT_OB_AKINCI", "UNIT_OB_SAHI", "UNIT_OB_SAHI"}
+
+function GiveOttomanArmy(iPlayer)
+	local pPlayer = Players[iPlayer]
+	local sp = pPlayer:GetStartingPlot()
+	if sp == nil then return end
+	for _, sType in ipairs(OTTOMAN_ARMY) do
+		local iUnit = GameInfoTypes[sType]
+		if iUnit ~= nil then pPlayer:InitUnit(iUnit, sp:GetX(), sp:GetY()) end
+	end
+	print("Osman Bey 1299: Ottoman army placed")
+end
+
 local function SetUpScenario()
 	-- A Medieval-era game does not start on turn 0, so compare with the start turn.
 	if Game.GetGameTurn() ~= Game.GetStartTurn() then return end
@@ -200,6 +214,10 @@ local function SetUpScenario()
 		local pPlayer = Players[iPlayer]
 		if pPlayer ~= nil and pPlayer:IsAlive() then
 			local info = GameInfo.Civilizations[pPlayer:GetCivilizationType()]
+			if info ~= nil and info.Type == "CIVILIZATION_OB_OTTOMAN" then
+				local ok, err = pcall(GiveOttomanArmy, iPlayer)
+				if not ok then print("Osman Bey 1299: Ottoman army error: " .. tostring(err)) end
+			end
 			local cities = info and SCENARIO_CITIES[info.Type]
 			if cities ~= nil then
 				local ok, err = pcall(SetUpPlayer, iPlayer, cities)

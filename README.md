@@ -16,12 +16,15 @@ The repository holds two mods:
 | | |
 |---|---|
 | **Leader** | Osman Bey (Osman I, c. 1258 – 1323/24) |
-| **Ability: Osman's Dream** | Captured cities have no resistance and pay Gold equal to 10 × their population (*istimalet*, "winning over"). Great Generals are earned 50% faster. |
-| **Akinji** (Turkish *akıncı*, replaces Knight) | Uses the Ottoman Sipahi model. Does not need Horses, 10% cheaper, +1 sight, pillages without spending movement and heals when it pillages. |
-| **Janissary / Yeniçeri** (replaces Musketman) | Strength 24, heals after destroying an enemy, attack bonus, starts with Drill I. |
+| **Ability: Osman's Dream** | Captured cities have no resistance and pay Gold equal to 10 × their population (*istimalet*, "winning over"). Land units get +25% strength against cities. Embarked units get +1 movement and landing costs 1 movement, so the Dardanelles and the Bosphorus are crossed quickly. Great Generals are earned 50% faster. |
+| **Akinji** (Turkish *akıncı*, replaces Knight) | Ottoman Sipahi model. Strength 24, 5 movement, no Horses needed, 10% cheaper, +1 sight, pillages without spending movement and heals when it pillages. |
+| **Janissary / Yeniçeri** (replaces Musketman) | Strength 28, heals after destroying an enemy, attack bonus, starts with Drill I. |
+| **Great Bombard / Şahi Topu** (replaces Trebuchet) | A cannon (24 ranged strength, cannon model) available with **Mathematics**, long before anyone else has gunpowder artillery. |
+| **Grand Bazaar / Kapalıçarşı** (replaces Market) | +3 Gold, +1 Culture, +1 Happiness on top of the Market. |
+| **Mosque / Cami** (replaces Temple) | +2 Faith, +2 Culture, +1 Happiness on top of the Temple, lower upkeep. |
 | **Kervansaray** (replaces Caravansary) | +2 Gold and +1 Culture on top of the trade-route bonuses. |
-| **Medrese** (replaces University) | +1 Culture and +1 Faith on top of the Science. |
-| **Tophane** (replaces Armory) | +1 Production and +15% Production for gunpowder and siege units, on top of the experience bonus. |
+| **Medrese** (replaces University) | +3 Science, +2 Culture and +1 Faith on top of the University. |
+| **Tophane** (replaces Armory) | +1 Production and +25% Production for gunpowder and siege units, on top of the experience bonus. |
 
 Each also has Civilopedia text, a Dawn of Man screen, diplomacy lines, 38 city names (Sögüt, Bursa, Iznik, …) and spy names. The Ottoman Beylik has its own soundtrack: two peace tracks, two war tracks and a diplomacy track.
 
@@ -41,7 +44,7 @@ Each also has Civilopedia text, a Dawn of Man screen, diplomacy lines, 38 city n
 ## The scenario: Rise of the Ottomans, 1299
 
 - Starts in the **Medieval era** with eight great powers: the **Ottoman Beylik**, the **Byzantine Empire**, the **Ilkhanate** (played by Mongolia), the **Mamluk Sultanate** (Egypt), **Venice**, **Austria**, **Poland** and the **Marinids** (Morocco).
-- The great powers start with the cities they held in 1299: Constantinople (with its walls), Thessalonica, Adrianople, Tabriz, Baghdad, Cairo, Damascus, Aleppo, Venice, Candia, Vienna, Fez and more – 27 cities in all. The Ottoman Beylik starts with a single settler near Bursa.
+- The great powers start with the cities they held in 1299: Constantinople (with its walls), Thessalonica, Adrianople, Tabriz, Baghdad, Cairo, Damascus, Aleppo, Venice, Candia, Vienna, Fez and more – 27 cities in all. The Ottoman Beylik starts near Bursa with its settlers, two Akinjis and two Great Bombards; Constantinople has its walls but no castle.
 - The city-states are those of 1299: the Anatolian beyliks (**Karaman, Germiyan, Karesi, Menteşe, Candar**), **Trebizond, Georgia, Cilician Armenia, Cyprus, Epirus, the Duchy of Athens, the Golden Horde, Genoese Caffa, Bulgaria, Sicily, Naples, Tunis, Tlemcen, Mecca, Rasulid Yemen, Makuria**, plus Ragusa, Genoa, Florence, the Papal States, Budapest, Belgrade, Prague, Kiev and Hormuz – 30 in all.
 - You can play any of the eight powers.
 

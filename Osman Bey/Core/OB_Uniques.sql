@@ -11,7 +11,8 @@
 CREATE TABLE OB_UnitMap (NewType TEXT, BaseType TEXT, Tag TEXT);
 INSERT INTO OB_UnitMap (NewType, BaseType, Tag) VALUES
 	('UNIT_OB_AKINCI',   'UNIT_KNIGHT',            'AKINCI'),
-	('UNIT_OB_YENICERI', 'UNIT_OTTOMAN_JANISSARY', 'YENICERI');
+	('UNIT_OB_YENICERI', 'UNIT_OTTOMAN_JANISSARY', 'YENICERI'),
+	('UNIT_OB_SAHI',     'UNIT_TREBUCHET',         'SAHI');
 
 CREATE TABLE OB_TmpUnits AS SELECT * FROM Units WHERE 0;
 INSERT INTO OB_TmpUnits SELECT u.* FROM Units u INNER JOIN OB_UnitMap m ON u.Type = m.BaseType;
@@ -77,7 +78,7 @@ DROP TABLE OB_UnitMap;
 
 -- Akinci (replaces Knight): no Horses needed, 10% cheaper, raider promotion
 DELETE FROM Unit_ResourceQuantityRequirements WHERE UnitType = 'UNIT_OB_AKINCI';
-UPDATE Units SET Cost = Cost * 9 / 10, FaithCost = FaithCost * 9 / 10 WHERE Type = 'UNIT_OB_AKINCI';
+UPDATE Units SET Cost = Cost * 9 / 10, FaithCost = FaithCost * 9 / 10, Combat = 24, Moves = Moves + 1 WHERE Type = 'UNIT_OB_AKINCI';
 -- Looks like a Turkish horseman, not a European knight: model, portrait and flag of the Ottoman Sipahi
 UPDATE Units SET
 	UnitArtInfo        = (SELECT UnitArtInfo        FROM Units WHERE Type = 'UNIT_OTTOMAN_SIPAHI'),
@@ -90,8 +91,22 @@ INSERT INTO Unit_FreePromotions (UnitType, PromotionType)
 SELECT 'UNIT_OB_AKINCI', 'PROMOTION_OB_AKINCI_RAID'
 WHERE EXISTS (SELECT 1 FROM UnitPromotions WHERE Type = 'PROMOTION_OB_AKINCI_RAID');
 
--- Janissary (replaces Musketman): the Janissary row plus Drill I
+-- Janissary (replaces Musketman): the Janissary row, strength 28, plus Drill I
+UPDATE Units SET Combat = 28 WHERE Type = 'UNIT_OB_YENICERI';
 INSERT INTO Unit_FreePromotions (UnitType, PromotionType) VALUES ('UNIT_OB_YENICERI', 'PROMOTION_DRILL_1');
+
+-- Great Bombard / Sahi Topu (replaces Trebuchet): a cannon available with Mathematics,
+-- long before any other civilization has gunpowder artillery.
+UPDATE Units SET PrereqTech = 'TECH_MATHEMATICS', ObsoleteTech = 'TECH_DYNAMITE', Combat = 16, RangedCombat = 24
+WHERE Type = 'UNIT_OB_SAHI';
+UPDATE Units SET
+	UnitArtInfo        = (SELECT UnitArtInfo        FROM Units WHERE Type = 'UNIT_CANNON'),
+	IconAtlas          = (SELECT IconAtlas          FROM Units WHERE Type = 'UNIT_CANNON'),
+	PortraitIndex      = (SELECT PortraitIndex      FROM Units WHERE Type = 'UNIT_CANNON'),
+	UnitFlagAtlas      = (SELECT UnitFlagAtlas      FROM Units WHERE Type = 'UNIT_CANNON'),
+	UnitFlagIconOffset = (SELECT UnitFlagIconOffset FROM Units WHERE Type = 'UNIT_CANNON')
+WHERE Type = 'UNIT_OB_SAHI' AND EXISTS (SELECT 1 FROM Units WHERE Type = 'UNIT_CANNON');
+DELETE FROM Unit_ResourceQuantityRequirements WHERE UnitType = 'UNIT_OB_SAHI';
 
 -- ------------------------------------------------------------
 -- Buildings
@@ -100,7 +115,9 @@ CREATE TABLE OB_BuildingMap (NewType TEXT, BaseType TEXT, Tag TEXT);
 INSERT INTO OB_BuildingMap (NewType, BaseType, Tag) VALUES
 	('BUILDING_OB_KERVANSARAY', 'BUILDING_CARAVANSARY', 'KERVANSARAY'),
 	('BUILDING_OB_MEDRESE',     'BUILDING_UNIVERSITY',  'MEDRESE'),
-	('BUILDING_OB_TOPHANE',     'BUILDING_ARMORY',      'TOPHANE');
+	('BUILDING_OB_TOPHANE',     'BUILDING_ARMORY',      'TOPHANE'),
+	('BUILDING_OB_KAPALICARSI', 'BUILDING_MARKET',      'KAPALICARSI'),
+	('BUILDING_OB_CAMI',        'BUILDING_TEMPLE',      'CAMI');
 
 CREATE TABLE OB_TmpBuildings AS SELECT * FROM Buildings WHERE 0;
 INSERT INTO OB_TmpBuildings SELECT b.* FROM Buildings b INNER JOIN OB_BuildingMap m ON b.Type = m.BaseType;
@@ -265,23 +282,37 @@ INSERT INTO Building_YieldChanges (BuildingType, YieldType, Yield) VALUES
 	('BUILDING_OB_KERVANSARAY', 'YIELD_GOLD', 2),
 	('BUILDING_OB_KERVANSARAY', 'YIELD_CULTURE', 1);
 
--- Medrese (replaces University): +1 Culture, +1 Faith
+-- Medrese (replaces University): +3 Science, +2 Culture, +1 Faith
+UPDATE Building_YieldChanges SET Yield = Yield + 3 WHERE BuildingType = 'BUILDING_OB_MEDRESE' AND YieldType = 'YIELD_SCIENCE';
+INSERT INTO Building_YieldChanges (BuildingType, YieldType, Yield)
+SELECT 'BUILDING_OB_MEDRESE', 'YIELD_SCIENCE', 3
+WHERE NOT EXISTS (SELECT 1 FROM Building_YieldChanges WHERE BuildingType = 'BUILDING_OB_MEDRESE' AND YieldType = 'YIELD_SCIENCE');
 INSERT INTO Building_YieldChanges (BuildingType, YieldType, Yield) VALUES
-	('BUILDING_OB_MEDRESE', 'YIELD_CULTURE', 1),
+	('BUILDING_OB_MEDRESE', 'YIELD_CULTURE', 2),
 	('BUILDING_OB_MEDRESE', 'YIELD_FAITH', 1);
+
+-- Kapalicarsi / Grand Bazaar (replaces Market): +3 Gold, +1 Culture, +1 Happiness
+UPDATE Building_YieldChanges SET Yield = Yield + 3 WHERE BuildingType = 'BUILDING_OB_KAPALICARSI' AND YieldType = 'YIELD_GOLD';
+INSERT INTO Building_YieldChanges (BuildingType, YieldType, Yield) VALUES ('BUILDING_OB_KAPALICARSI', 'YIELD_CULTURE', 1);
+UPDATE Buildings SET Happiness = Happiness + 1 WHERE Type = 'BUILDING_OB_KAPALICARSI';
+
+-- Cami / Mosque (replaces Temple): +2 Faith, +2 Culture, +1 Happiness, upkeep 1
+UPDATE Building_YieldChanges SET Yield = Yield + 2 WHERE BuildingType = 'BUILDING_OB_CAMI' AND YieldType = 'YIELD_FAITH';
+INSERT INTO Building_YieldChanges (BuildingType, YieldType, Yield) VALUES ('BUILDING_OB_CAMI', 'YIELD_CULTURE', 2);
+UPDATE Buildings SET Happiness = Happiness + 1, GoldMaintenance = 1 WHERE Type = 'BUILDING_OB_CAMI';
 
 -- Tophane (replaces Armory): +1 Production, +15% Production of Gunpowder and Siege units
 INSERT INTO Building_YieldChanges (BuildingType, YieldType, Yield) VALUES ('BUILDING_OB_TOPHANE', 'YIELD_PRODUCTION', 1);
 INSERT INTO Building_UnitCombatProductionModifiers (BuildingType, UnitCombatType, Modifier) VALUES
-	('BUILDING_OB_TOPHANE', 'UNITCOMBAT_GUN', 15),
-	('BUILDING_OB_TOPHANE', 'UNITCOMBAT_SIEGE', 15);
+	('BUILDING_OB_TOPHANE', 'UNITCOMBAT_GUN', 25),
+	('BUILDING_OB_TOPHANE', 'UNITCOMBAT_SIEGE', 25);
 
 -- ------------------------------------------------------------
 -- Assign to the civilization (only what was really created)
 -- ------------------------------------------------------------
 INSERT INTO Civilization_UnitClassOverrides (CivilizationType, UnitClassType, UnitType)
-SELECT 'CIVILIZATION_OB_OTTOMAN', Class, Type FROM Units WHERE Type IN ('UNIT_OB_AKINCI', 'UNIT_OB_YENICERI');
+SELECT 'CIVILIZATION_OB_OTTOMAN', Class, Type FROM Units WHERE Type IN ('UNIT_OB_AKINCI', 'UNIT_OB_YENICERI', 'UNIT_OB_SAHI');
 
 INSERT INTO Civilization_BuildingClassOverrides (CivilizationType, BuildingClassType, BuildingType)
 SELECT 'CIVILIZATION_OB_OTTOMAN', BuildingClass, Type FROM Buildings
-WHERE Type IN ('BUILDING_OB_KERVANSARAY', 'BUILDING_OB_MEDRESE', 'BUILDING_OB_TOPHANE');
+WHERE Type IN ('BUILDING_OB_KERVANSARAY', 'BUILDING_OB_MEDRESE', 'BUILDING_OB_TOPHANE', 'BUILDING_OB_KAPALICARSI', 'BUILDING_OB_CAMI');

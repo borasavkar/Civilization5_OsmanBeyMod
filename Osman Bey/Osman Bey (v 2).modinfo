@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="4f6b2c1e-8a3d-4e57-b0c9-2d1e9a7f1299" version="1">
+<Mod id="4f6b2c1e-8a3d-4e57-b0c9-2d1e9a7f1299" version="2">
   <Properties>
     <Name>Osman Bey (Ottoman Beylik)</Name>
     <Stability>Beta</Stability>
-    <Teaser>Osman Bey and the Ottoman Beylik, with Akinci and Janissary units, three Ottoman buildings and a real map of the Ottoman world in 1299.</Teaser>
-    <Description>Adds Osman Bey, founder of the Ottoman state, leading the Ottoman Beylik. Unique abilities: Osman's Dream (captured cities have no resistance and pay gold; faster Great Generals), the Akinci (replaces the Knight), the Janissary (replaces the Musketman), the Kervansaray, the Medrese and the Tophane. Includes the 'Ottoman Frontiers (1299)' map: real geography from Vienna to Yemen and from Morocco to the Caspian Sea, with rivers and historical start positions. Requires Brave New World.</Description>
+    <Teaser>Osman Bey and the Ottoman Beylik, with Akinjis, Janissaries, Great Bombards, five Ottoman buildings and a real map of the Ottoman world in 1299.</Teaser>
+    <Description>Adds Osman Bey, founder of the Ottoman state, leading the Ottoman Beylik. Unique abilities: Osman's Dream (captured cities have no resistance and pay gold, +25% strength against cities, fast crossing of straits, faster Great Generals), the Akinji (replaces the Knight), the Janissary (replaces the Musketman), the Great Bombard (a cannon with Mathematics, replaces the Trebuchet), the Grand Bazaar, the Mosque, the Kervansaray, the Medrese and the Tophane. Includes the 'Ottoman Frontiers (1299)' map: real geography from Vienna to Yemen and from Morocco to the Caspian Sea, with rivers and historical start positions. Requires Brave New World.</Description>
     <Authors>Bora Savkar</Authors>
     <HideSetupGame>0</HideSetupGame>
     <AffectsSavedGames>1</AffectsSavedGames>
@@ -52,9 +52,9 @@
     <File md5="6A88F0D1FA777038894852A5C388A5CF" import="1">Art/Leaders/OB_Osman_Scene.xml</File>
     <File md5="AB1115F643D0CA8FDA564E4F55F563EC" import="0">Core/OB_Art.sql</File>
     <File md5="7103F98F9287D1A854EFB91B9CBF77D4" import="0">Core/OB_Audio.xml</File>
-    <File md5="2D23088E13FA00E5A6A670EA3FDEB452" import="0">Core/OB_Civilization.xml</File>
-    <File md5="1E0B52B33FB6B0857299B8C2CF3CE8C8" import="0">Core/OB_Promotions.xml</File>
-    <File md5="CA77C2C28DC13D05A6D0024D7F941425" import="0">Core/OB_Uniques.sql</File>
+    <File md5="A8DCE8879EA36357FEB82F3A2EE66FB4" import="0">Core/OB_Civilization.xml</File>
+    <File md5="CD5449280646EA02CADC910CE0221B5A" import="0">Core/OB_Promotions.xml</File>
+    <File md5="26DE17F1AD8AEB30B1D6ABA363D51AD9" import="0">Core/OB_Uniques.sql</File>
     <File md5="101EE07DC6F3A7FD01BFA6D71301C062" import="0">Lua/OB_Traits.lua</File>
     <File md5="F78DAEF768E9B63275ADE86A9E36DB51" import="0">Maps/OB_Ottoman1299.lua</File>
     <File md5="39758B3C720A1B617170B08983449C52" import="1">Sounds/OB_Music_Attack.mp3</File>
@@ -62,7 +62,7 @@
     <File md5="86D7FD5D9FAC77F7F7D2281C2C7DCAEA" import="1">Sounds/OB_Music_Diplomacy.mp3</File>
     <File md5="14955858D46A88647502614217963C41" import="1">Sounds/OB_Music_MyCountry.mp3</File>
     <File md5="2BED18C878253C18B917517B4ACA51F9" import="1">Sounds/OB_Music_Risky.mp3</File>
-    <File md5="8655B3B4C01B6A127AA43307C819A942" import="0">Text/OB_Text.xml</File>
+    <File md5="B98D2D7874F2257163DFEE15AB64CD9B" import="0">Text/OB_Text.xml</File>
   </Files>
   <Actions>
     <OnModActivated>

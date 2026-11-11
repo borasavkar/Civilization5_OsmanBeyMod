@@ -217,7 +217,7 @@ dofile(ROOT .. "Osman Bey 1299 Scenario/Lua/OB1299_Scenario.lua")
 local byz = Players[1]
 check(#byz.cities == 5, "Byzantium founded " .. #byz.cities .. " cities")
 check(byz.cities[1] and byz.cities[1].name == "Constantinople", "Byzantine capital is Constantinople")
-check(byz.cities[1] and byz.cities[1].b[GameInfoTypes.BUILDING_CASTLE] == 1, "Constantinople has a castle")
+check(byz.cities[1] and byz.cities[1].b[GameInfoTypes.BUILDING_WALLS] == 1 and not byz.cities[1].b[GameInfoTypes.BUILDING_CASTLE], "Constantinople has walls but no castle")
 check(byz.units[1].dead == true, "Byzantine settler removed")
 check(#Players[0].cities == 0 and not Players[0].units[1].dead, "Ottoman beylik keeps its settler")
 local ot = Players[0].units

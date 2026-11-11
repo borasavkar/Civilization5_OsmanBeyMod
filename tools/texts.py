@@ -20,7 +20,9 @@ t("TXT_KEY_LEADER_OB_OSMAN_PEDIA", "Osman Bey")
 t("TXT_KEY_TRAIT_OB_OSMAN_SHORT", "Osman's Dream")
 t("TXT_KEY_TRAIT_OB_OSMAN",
   "Captured cities have no [ICON_RESISTANCE] Resistance and grant [ICON_GOLD] Gold equal to 10 times their "
-  "population. Great Generals are earned 50% faster.")
+  "population. Land units fight with +25% [ICON_STRENGTH] Combat Strength against cities. Embarked units have +1 "
+  "[ICON_MOVES] Movement and landing costs only 1 [ICON_MOVES] Movement, so the straits are quickly crossed. "
+  "Great Generals are earned 50% faster.")
 
 t("TXT_KEY_CIV5_DAWN_OB_OTTOMAN_TEXT",
   "Hail, Osman Bey, son of Ertugrul! On the uneasy frontier between the fading Sultanate of the Seljuks and the "
@@ -82,8 +84,9 @@ t("TXT_KEY_CIVILOPEDIA_CIVS_OB_OTTOMAN_FACTOID_TEXT",
 # ======================================================================
 UNITS = {
     "AKINCI": ("Akinji",
-               "Replaces the Knight. Does not require [ICON_RES_HORSE] Horses, costs less, has +1 sight and can "
-               "pillage without spending movement, healing when it does.",
+               "Replaces the Knight. Stronger (24 [ICON_STRENGTH]) and faster (+1 [ICON_MOVES]) than the Knight, does not "
+               "require [ICON_RES_HORSE] Horses, costs less, has +1 sight and can pillage without spending movement, "
+               "healing when it does.",
                "The Akinji is a raider. Use its speed and free pillaging to strip enemy improvements, cut trade routes "
                "and catch exposed workers and settlers. Like the Knight it is weak against cities; leave sieges to the "
                "infantry and artillery.",
@@ -92,14 +95,22 @@ UNITS = {
                "enemy before a campaign. Their commanders came from a few hereditary families, such as the "
                "Mihaloglu and the Evrenosoglu."),
     "YENICERI": ("Janissary (Yeniceri)",
-                 "Replaces the Musketman. Stronger than the Musketman, heals after destroying an enemy, fights with an "
-                 "attack bonus and starts with the Drill I promotion.",
+                 "Replaces the Musketman. Much stronger than the Musketman (28 [ICON_STRENGTH]), heals after destroying an "
+                 "enemy, fights with an attack bonus and starts with the Drill I promotion.",
                  "Janissaries are elite gunpowder infantry. Use them to lead assaults: each victory heals them, so a "
                  "line of Janissaries can push through an enemy army without stopping to rest.",
                  "The Janissaries (Yeniceri, 'new soldiers') were the standing infantry of the Ottoman sultans, formed "
                  "in the 14th century. They were paid salaries, lived in barracks, wore uniforms and drilled "
                  "together, which made them one of the first permanent professional armies in Europe. By the 16th "
                  "century they were famous for their discipline and their firearms."),
+    "SAHI": ("Great Bombard (Sahi Topu)",
+             "Replaces the Trebuchet. A true cannon (24 [ICON_RANGE_STRENGTH] ranged strength) available with "
+             "Mathematics, long before any other civilization has gunpowder artillery.",
+             "The Great Bombard turns the Ottomans into the masters of siege warfare centuries early. Escort it "
+             "with Janissaries or Akinjis and batter down city walls; it stays in service until Dynamite.",
+             "Ottoman gunners were famous for their giant bombards (sahi toplari). At the siege of Constantinople "
+             "in 1453 Mehmed II deployed great guns that hurled stone balls against the Theodosian Walls and "
+             "opened the breaches through which the city was taken."),
 }
 
 BUILDINGS = {
@@ -112,20 +123,35 @@ BUILDINGS = {
                     "rest safely. The Seljuks and the Ottomans built them a day's journey apart along the great roads "
                     "of Anatolia, often as charitable foundations, binding the empire together through trade."),
     "MEDRESE": ("Medrese",
-                "Replaces the University. Provides +1 [ICON_CULTURE] Culture and +1 [ICON_PEACE] Faith in addition to "
-                "the University's [ICON_RESEARCH] Science.",
+                "Replaces the University. Provides +3 [ICON_RESEARCH] Science, +2 [ICON_CULTURE] Culture and "
+                "+1 [ICON_PEACE] Faith in addition to the University's bonuses.",
                 "The Medrese advances science, culture and faith at the same time. Build it in your largest cities.",
                 "Medreses were colleges of law, theology and the sciences. Orhan founded the first Ottoman medrese at "
                 "Iznik in 1331; later the great mosque complexes of Istanbul each had their own colleges, which "
                 "trained the judges, teachers and administrators of the empire."),
     "TOPHANE": ("Tophane",
-                "Replaces the Armory. Provides +1 [ICON_PRODUCTION] Production and +15% [ICON_PRODUCTION] Production "
+                "Replaces the Armory. Provides +1 [ICON_PRODUCTION] Production and +25% [ICON_PRODUCTION] Production "
                 "when building Gunpowder and Siege units, in addition to the Armory's experience bonus.",
                 "The Tophane turns a military city into an arsenal. Combine it with the Janissary to field veteran "
                 "armies quickly.",
                 "The Tophane-i Amire, the imperial cannon foundry, was established in Istanbul after the conquest of "
                 "1453. Ottoman gunners were among the best in Europe and Asia, and the foundry cast the guns that "
                 "armed the sultans' armies and fortresses for centuries."),
+    "KAPALICARSI": ("Grand Bazaar (Kapalicarsi)",
+                    "Replaces the Market. Provides +3 [ICON_GOLD] Gold, +1 [ICON_CULTURE] Culture and "
+                    "+1 [ICON_HAPPINESS_1] Happiness in addition to the Market's bonuses.",
+                    "Build the Grand Bazaar early: its Gold pays for your armies and its Happiness lets your "
+                    "cities grow.",
+                    "The covered bazaar (kapalicarsi) was the commercial heart of an Ottoman city. Bursa's Bedesten "
+                    "was built under Bayezid I, and the Grand Bazaar of Istanbul, begun by Mehmed II after 1453, "
+                    "grew into one of the largest covered markets in the world."),
+    "CAMI": ("Mosque (Cami)",
+             "Replaces the Temple. Provides +2 [ICON_PEACE] Faith, +2 [ICON_CULTURE] Culture and "
+             "+1 [ICON_HAPPINESS_1] Happiness in addition to the Temple's Faith, and costs less upkeep.",
+             "The Mosque spreads faith and culture together. Build it in every city.",
+             "Ottoman mosques (cami) were the centres of their towns, usually part of a complex (kulliye) with "
+             "schools, kitchens for the poor and baths. The early mosques of Bursa and Iznik led to the great "
+             "domed mosques of the imperial capital."),
 }
 for tag, (name, helptext, strat, pedia) in UNITS.items():
     t("TXT_KEY_UNIT_OB_%s" % tag, name)
@@ -139,6 +165,8 @@ for tag, (name, helptext, strat, pedia) in BUILDINGS.items():
     t("TXT_KEY_BUILDING_OB_%s_PEDIA" % tag, pedia)
 
 t("TXT_KEY_PROMOTION_OB_AKINCI_RAID", "Akinji Raider")
+t("TXT_KEY_PROMOTION_OB_GHAZA", "Ghaza")
+t("TXT_KEY_PROMOTION_OB_GHAZA_HELP", "+25% Combat Strength when attacking cities.")
 t("TXT_KEY_PROMOTION_OB_AKINCI_RAID_HELP", "+1 sight. Pillaging costs no movement and heals the unit.")
 
 t("TXT_KEY_OB_ISTIMALET", "Istimalet: [ICON_RESISTANCE] Resistance in {1_City} has ended and the treasury receives {2_Num} [ICON_GOLD] Gold.")
@@ -222,7 +250,8 @@ s("TXT_KEY_OB1299_INTRO",
   "Christian world, though its empire has shrunk to a few provinces. The Ilkhans rule Persia and Iraq from Tabriz, "
   "the Mamluk sultans hold Egypt, Syria and the holy cities, and Venice commands the sea. Beyond the Danube, Hungary, "
   "Austria and Poland are rising.[NEWLINE][NEWLINE]The great powers begin with the cities they held in 1299. The "
-  "Ottoman Beylik begins with a single settler near Bursa. History is yours to write.")
+  "Ottoman Beylik begins near Bursa with its settlers, two Akinjis and two Great Bombards. History is yours to "
+  "write.")
 s("TXT_KEY_OB1299_CHOOSE_CIV", "Choose your civilization")
 s("TXT_KEY_OB1299_DIFFICULTY", "Difficulty: {1_Name}")
 s("TXT_KEY_OB1299_START", "Start Scenario")

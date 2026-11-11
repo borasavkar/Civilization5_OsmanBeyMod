@@ -8,21 +8,22 @@ from xml.sax.saxutils import escape
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_mod import MOD1, MOD1_ID, MOD2, MOD2_ID  # noqa: E402
 
-VERSION = 1
+VERSION = 2
 BNW_ID = "6DA07636-4123-4018-B643-6575B4EC336B"   # Brave New World (Expansion2.Civ5Pkg)
 
 MODS = [
     {
         "folder": MOD1, "id": MOD1_ID, "file": "Osman Bey (v %d).modinfo",
         "name": "Osman Bey (Ottoman Beylik)",
-        "teaser": "Osman Bey and the Ottoman Beylik, with Akinci and Janissary units, three Ottoman buildings and a "
+        "teaser": "Osman Bey and the Ottoman Beylik, with Akinjis, Janissaries, Great Bombards, five Ottoman buildings and a "
                   "real map of the Ottoman world in 1299.",
         "description": "Adds Osman Bey, founder of the Ottoman state, leading the Ottoman Beylik. Unique abilities: "
-                       "Osman's Dream (captured cities have no resistance and pay gold; faster Great Generals), the "
-                       "Akinci (replaces the Knight), the Janissary (replaces the Musketman), the Kervansaray, the "
-                       "Medrese and the Tophane. Includes the 'Ottoman Frontiers (1299)' map: real geography from "
-                       "Vienna to Yemen and from Morocco to the Caspian Sea, with rivers and historical start "
-                       "positions. Requires Brave New World.",
+                       "Osman's Dream (captured cities have no resistance and pay gold, +25% strength against cities, "
+                       "fast crossing of straits, faster Great Generals), the Akinji (replaces the Knight), the "
+                       "Janissary (replaces the Musketman), the Great Bombard (a cannon with Mathematics, replaces the "
+                       "Trebuchet), the Grand Bazaar, the Mosque, the Kervansaray, the Medrese and the Tophane. "
+                       "Includes the 'Ottoman Frontiers (1299)' map: real geography from Vienna to Yemen and from "
+                       "Morocco to the Caspian Sea, with rivers and historical start positions. Requires Brave New World.",
         "hide_setup": 0, "multiplayer": 1,
         "db": ["Core/OB_Civilization.xml", "Text/OB_Text.xml", "Core/OB_Promotions.xml", "Core/OB_Audio.xml",
                "Core/OB_Uniques.sql", "Core/OB_Art.sql"],

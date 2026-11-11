@@ -16,5 +16,44 @@
 			<PediaType>PEDIA_ATTRIBUTES</PediaType>
 			<PediaEntry>TXT_KEY_PROMOTION_OB_AKINCI_RAID</PediaEntry>
 		</Row>
+		<Row>
+			<Type>PROMOTION_OB_GHAZA</Type>
+			<Description>TXT_KEY_PROMOTION_OB_GHAZA</Description>
+			<Help>TXT_KEY_PROMOTION_OB_GHAZA_HELP</Help>
+			<Sound>AS2D_IF_LEVELUP</Sound>
+			<CannotBeChosen>true</CannotBeChosen>
+			<CityAttack>25</CityAttack>
+			<PortraitIndex>3</PortraitIndex>
+			<IconAtlas>PROMOTION_ATLAS</IconAtlas>
+			<PediaType>PEDIA_ATTRIBUTES</PediaType>
+			<PediaEntry>TXT_KEY_PROMOTION_OB_GHAZA</PediaEntry>
+		</Row>
 	</UnitPromotions>
+	<Trait_FreePromotionUnitCombats>
+		<Row>
+			<TraitType>TRAIT_OB_OSMAN</TraitType>
+			<UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
+			<PromotionType>PROMOTION_OB_GHAZA</PromotionType>
+		</Row>
+		<Row>
+			<TraitType>TRAIT_OB_OSMAN</TraitType>
+			<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
+			<PromotionType>PROMOTION_OB_GHAZA</PromotionType>
+		</Row>
+		<Row>
+			<TraitType>TRAIT_OB_OSMAN</TraitType>
+			<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
+			<PromotionType>PROMOTION_OB_GHAZA</PromotionType>
+		</Row>
+		<Row>
+			<TraitType>TRAIT_OB_OSMAN</TraitType>
+			<UnitCombatType>UNITCOMBAT_SIEGE</UnitCombatType>
+			<PromotionType>PROMOTION_OB_GHAZA</PromotionType>
+		</Row>
+		<Row>
+			<TraitType>TRAIT_OB_OSMAN</TraitType>
+			<UnitCombatType>UNITCOMBAT_ARCHER</UnitCombatType>
+			<PromotionType>PROMOTION_OB_GHAZA</PromotionType>
+		</Row>
+	</Trait_FreePromotionUnitCombats>
 </GameData>
