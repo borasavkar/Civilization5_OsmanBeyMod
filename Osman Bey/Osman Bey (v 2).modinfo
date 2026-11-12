@@ -56,7 +56,7 @@
     <File md5="CD5449280646EA02CADC910CE0221B5A" import="0">Core/OB_Promotions.xml</File>
     <File md5="26DE17F1AD8AEB30B1D6ABA363D51AD9" import="0">Core/OB_Uniques.sql</File>
     <File md5="101EE07DC6F3A7FD01BFA6D71301C062" import="0">Lua/OB_Traits.lua</File>
-    <File md5="F78DAEF768E9B63275ADE86A9E36DB51" import="0">Maps/OB_Ottoman1299.lua</File>
+    <File md5="73ED4B2CC530A4DAC81D58FC9A89196B" import="0">Maps/OB_Ottoman1299.lua</File>
     <File md5="39758B3C720A1B617170B08983449C52" import="1">Sounds/OB_Music_Attack.mp3</File>
     <File md5="6F11BC4CAC16A2E6F068615B139B61F1" import="1">Sounds/OB_Music_Calm.mp3</File>
     <File md5="86D7FD5D9FAC77F7F7D2281C2C7DCAEA" import="1">Sounds/OB_Music_Diplomacy.mp3</File>

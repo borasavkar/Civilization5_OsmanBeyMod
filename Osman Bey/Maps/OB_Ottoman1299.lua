@@ -707,6 +707,91 @@ local function RelocateCityStates(self)
 	end
 end
 ------------------------------------------------------------------------------
+-- The game balances resources around the starts it picks itself. A start moved
+-- to its historic site misses that, so each one is enriched here afterwards.
+------------------------------------------------------------------------------
+local function ResId(s) return GameInfoTypes[s] end
+
+local function PlaceAround(cx, cy, maxDist, resource, quantity, test, clearFeature)
+	local iRes = ResId(resource)
+	if iRes == nil then return false end
+	for dist = 1, maxDist do
+		for dy = -dist, dist do
+			for dx = -dist - 1, dist + 1 do
+				local p = Map.GetPlot(cx + dx, cy + dy)
+				if p ~= nil and Map.PlotDistance(cx, cy, p:GetX(), p:GetY()) == dist
+					and not p:IsWater() and not p:IsMountain() and p:GetResourceType(-1) == -1 and test(p) then
+					if clearFeature then p:SetFeatureType(-1, -1); end
+					p:SetResourceType(iRes, quantity);
+					return true;
+				end
+			end
+		end
+	end
+	return false;
+end
+
+local function IsFlat(p) return not p:IsHills() end
+local function NoFeature(p)
+	local f = p:GetFeatureType();
+	return f == -1 or f == GameInfoTypes.FEATURE_FOREST or f == GameInfoTypes.FEATURE_JUNGLE or f == GameInfoTypes.FEATURE_MARSH;
+end
+local function TerrainIs(p, ...)
+	local t = p:GetTerrainType();
+	for _, name in ipairs({...}) do if t == GameInfoTypes[name] then return true; end end
+	return false;
+end
+
+local function EnrichStart(cx, cy, bOttoman)
+	local function plains(p) return IsFlat(p) and NoFeature(p) and TerrainIs(p, "TERRAIN_PLAINS"); end
+	local function grass(p) return IsFlat(p) and NoFeature(p) and TerrainIs(p, "TERRAIN_GRASS"); end
+	local function flat(p) return IsFlat(p) and NoFeature(p) and TerrainIs(p, "TERRAIN_GRASS", "TERRAIN_PLAINS"); end
+	local function hills(p) return p:IsHills() and TerrainIs(p, "TERRAIN_GRASS", "TERRAIN_PLAINS"); end
+
+	-- Desert, tundra and marsh next to the city site become farmland.
+	for _, nb in ipairs(OB_Neighbors(cx, cy)) do
+		local p = Map.GetPlot(nb[1], nb[2]);
+		if p ~= nil and not p:IsWater() and not p:IsMountain() then
+			if TerrainIs(p, "TERRAIN_DESERT", "TERRAIN_TUNDRA", "TERRAIN_SNOW") then
+				p:SetTerrainType(GameInfoTypes.TERRAIN_PLAINS, false, true);
+			end
+			if p:GetFeatureType() == GameInfoTypes.FEATURE_MARSH then p:SetFeatureType(-1, -1); end
+		end
+	end
+
+	-- Every historic start: two food resources within two tiles.
+	if not PlaceAround(cx, cy, 2, "RESOURCE_WHEAT", 1, plains, true) then PlaceAround(cx, cy, 2, "RESOURCE_COW", 1, grass, true); end
+	if not PlaceAround(cx, cy, 2, "RESOURCE_COW", 1, grass, true) then PlaceAround(cx, cy, 2, "RESOURCE_SHEEP", 1, hills, true); end
+
+	if bOttoman then
+		-- Bithynia: the fertile plains of Bursa, Yenisehir and Iznik.
+		for dist = 1, 3 do
+			for dy = -dist, dist do
+				for dx = -dist - 1, dist + 1 do
+					local p = Map.GetPlot(cx + dx, cy + dy);
+					if p ~= nil and Map.PlotDistance(cx, cy, p:GetX(), p:GetY()) == dist and not p:IsWater()
+						and not p:IsMountain() and TerrainIs(p, "TERRAIN_PLAINS", "TERRAIN_DESERT") and (p:IsRiver() or dist == 1) then
+						p:SetTerrainType(GameInfoTypes.TERRAIN_GRASS, false, true);
+					end
+				end
+			end
+		end
+		PlaceAround(cx, cy, 3, "RESOURCE_SHEEP", 1, hills, false);
+		PlaceAround(cx, cy, 3, "RESOURCE_HORSE", 4, flat, true);
+		PlaceAround(cx, cy, 3, "RESOURCE_IRON", 4, hills, false);
+		PlaceAround(cx, cy, 4, "RESOURCE_WINE", 1, flat, true);
+		PlaceAround(cx, cy, 4, "RESOURCE_WHEAT", 1, plains, true);
+		-- Bursa silk grows in the forests
+		if not PlaceAround(cx, cy, 4, "RESOURCE_SILK", 1, function(p)
+				return IsFlat(p) and p:GetFeatureType() == GameInfoTypes.FEATURE_FOREST; end, false) then
+			PlaceAround(cx, cy, 4, "RESOURCE_SILK", 1, function(p)
+				if flat(p) then p:SetFeatureType(GameInfoTypes.FEATURE_FOREST, -1); return true; end
+				return false; end, false);
+		end
+		PlaceAround(cx, cy, 5, "RESOURCE_COW", 1, grass, true);
+	end
+end
+------------------------------------------------------------------------------
 function StartPlotSystem()
 	local startOption = Map.GetCustomOption(1);
 	local res = Map.GetCustomOption(2);
@@ -738,5 +823,16 @@ function StartPlotSystem()
 
 	start_plot_database:PlaceNaturalWonders();
 	start_plot_database:PlaceResourcesAndCityStates();
+
+	if bHistoric then
+		for iPlayer = 0, GameDefines.MAX_MAJOR_CIVS - 1 do
+			local t = CivTypeOfPlayer(iPlayer);
+			local plot = t and Players[iPlayer]:GetStartingPlot();
+			if plot ~= nil then
+				local ok, err = pcall(EnrichStart, plot:GetX(), plot:GetY(), t == "CIVILIZATION_OB_OTTOMAN");
+				if not ok then print("Ottoman Frontiers 1299: enriching start failed: " .. tostring(err)); end
+			end
+		end
+	end
 end
 ------------------------------------------------------------------------------

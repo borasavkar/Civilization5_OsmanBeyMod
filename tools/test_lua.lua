@@ -19,7 +19,9 @@ FlowDirectionTypes = {FLOWDIRECTION_NORTH = 0, FLOWDIRECTION_NORTHEAST = 1, FLOW
 	FLOWDIRECTION_SOUTH = 3, FLOWDIRECTION_SOUTHWEST = 4, FLOWDIRECTION_NORTHWEST = 5}
 GameInfoTypes = {TERRAIN_GRASS = 0, TERRAIN_PLAINS = 1, TERRAIN_DESERT = 2, TERRAIN_TUNDRA = 3, TERRAIN_SNOW = 4,
 	TERRAIN_COAST = 5, TERRAIN_OCEAN = 6, FEATURE_ICE = 0, UNITCLASS_SETTLER = 1, BUILDING_PALACE = 10,
-	BUILDING_WALLS = 11, BUILDING_CASTLE = 12}
+	BUILDING_WALLS = 11, BUILDING_CASTLE = 12, FEATURE_FOREST = 1, FEATURE_JUNGLE = 2, FEATURE_MARSH = 3,
+	RESOURCE_WHEAT = 40, RESOURCE_COW = 41, RESOURCE_SHEEP = 42, RESOURCE_HORSE = 43, RESOURCE_IRON = 44,
+	RESOURCE_WINE = 45, RESOURCE_SILK = 46}
 
 local CIVS = {"CIVILIZATION_OB_OTTOMAN", "CIVILIZATION_BYZANTIUM", "CIVILIZATION_MONGOL", "CIVILIZATION_EGYPT",
 	"CIVILIZATION_VENICE", "CIVILIZATION_AUSTRIA", "CIVILIZATION_POLAND", "CIVILIZATION_MOROCCO"}
@@ -46,13 +48,17 @@ function Plot:IsMountain() return self.ptype == PlotTypes.PLOT_MOUNTAIN end
 function Plot:IsHills() return self.ptype == PlotTypes.PLOT_HILLS end
 function Plot:IsImpassable() return false end
 function Plot:GetTerrainType() return self.terrain end
-function Plot:GetFeatureType() return -1 end
+function Plot:GetFeatureType() return self.feature or -1 end
 function Plot:IsRiver() return self.river == true end
 function Plot:IsCoastalLand() return false end
 function Plot:SetWOfRiver(b, f) assert(f ~= nil, "flow nil"); self.river = true; self.wRiver = f end
 function Plot:SetNWOfRiver(b, f) assert(f ~= nil, "flow nil"); self.river = true; self.nwRiver = f end
 function Plot:SetNEOfRiver(b, f) assert(f ~= nil, "flow nil"); self.river = true; self.neRiver = f end
 function Plot:IsCity() return self.city ~= nil end
+function Plot:GetResourceType() return self.res or -1 end
+function Plot:SetResourceType(r, n) self.res = r; self.resN = n end
+function Plot:SetFeatureType(f) self.feature = f end
+function Plot:SetTerrainType(t) self.terrain = t end
 function Plot:GetOwner() return self.owner or -1 end
 function Plot:GetNumUnits() return 0 end
 function Plot:GetPlotCity() return self.city end
@@ -180,6 +186,16 @@ for i, c in ipairs(CIVS) do
 	local d = Map.PlotDistance(sp:GetX(), sp:GetY(), e[1], e[2])
 	check(d <= 3, c .. " start is " .. d .. " tiles from its historic site")
 	check(not sp:IsWater() and not sp:IsMountain(), c .. " start on valid land")
+end
+do
+	local sp = Players[0]:GetStartingPlot()
+	local found = {}
+	for _, p in pairs(plots) do
+		if p.res and Map.PlotDistance(p.x, p.y, sp:GetX(), sp:GetY()) <= 5 then found[p.res] = true end
+	end
+	for _, r in ipairs({"RESOURCE_WHEAT", "RESOURCE_COW", "RESOURCE_HORSE", "RESOURCE_IRON", "RESOURCE_WINE", "RESOURCE_SILK"}) do
+		check(found[GameInfoTypes[r]], "Ottoman start has " .. r)
+	end
 end
 local moved = 0
 for n = 1, NUM_MINORS do
